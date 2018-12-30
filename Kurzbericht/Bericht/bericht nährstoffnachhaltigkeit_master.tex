@@ -1,0 +1,226 @@
+\documentclass[a4paper, 12pt, titlepage]{scrartcl} % tech.report
+\usepackage{authblk}
+
+% --- define abstract-section ---- &
+\newsavebox{\abstractbox}
+\renewenvironment{abstract}
+  {\begin{lrbox}{0}\begin{minipage}{\textwidth}
+   \begin{center}\normalfont\sectfont\abstractname\end{center}\quotation}
+  {\endquotation\end{minipage}\end{lrbox}%
+   \global\setbox\abstractbox=\box0 }
+
+\usepackage{etoolbox}
+\makeatletter
+\expandafter\patchcmd\csname\string\maketitle\endcsname
+  {\vskip\z@\@plus3fill}
+  {\vskip\z@\@plus2fill\box\abstractbox\vskip\z@\@plus1fill}
+  {}{}
+\makeatother
+% ----------------------------- &
+
+%============================================ Define Titlepage =====================================================%
+     
+\author[*]{\large Andreas Hill}
+\affil[*]{\normalsize Forstreferendar, Landesforsten Rheinland-Pfalz}     
+\renewcommand\Authands{, } 
+ 
+% \date{\vspace{-0.3cm} \large \today \vspace{1.1cm}}
+\date{\vspace{-0.8ex}}
+\title{\LARGE Gewährleistung der Nährstoffnachhaltigkeit in den Wäldern von Rheinland-Pfalz - Bewertung des Einsatzes von Debarking Heads \vspace{-1ex}}
+\subject{\vspace{-1.5cm} Kurzbericht \vspace{0.2cm} \vspace{-0.5cm}}
+
+
+\begin{abstract}
+\noindent \small
+The objective behind this report was to identify an ordinary least square regression model to generate predictions of the standing timber volume associated to a sample location of the Third German Forest Inventory (\textit{BWI3}). The motivation was the consequent integration of the model in model-assisted regression estimators for domain estimations over the entire state- and communal forests of the federal state of Rhineland-Palatinate (Germany). This imposed the restriction on the predictor variables to be available over an area of 6155 km$^2$. Both LiDAR derived height metrics and information from a satellite-based tree species classification map were available and considered as potential predictor variables. In this context, we also introduce a calibration technique to minimize the effect of misclassifications in the tree species predictor variable on the regression model properties. Since the angle count sampling technique applied in the \textit{BWI3} survey leads to ambiguities in the choice of a suitable extraction area (support) for each predictor variable, a model selection procedure was developed to identify the best performing support settings. The mean canopy height and the main tree species of a sample location turned out to be valuable and meaningful predictors. Heterogeneity in the LiDAR data due to time lags and quality variations could considerably be adjusted for by including quality information as a categorical variable in the regression model. The regression model achieved an overall adjusted $R^2$ of 0.49 and a cross validated root mean square error (RMSE$_{cv}$) of 132.12 m$^3$/ha. The model accuracy yet turned out to be particularly higher in regions where the LiDAR acquisition year was identical with the year of the terrestrial inventory ($R^2$ of 0.57).
+\end{abstract}
+
+
+%============================================ Load Packages ========================================================%
+\usepackage{hyperref}
+ \hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}%package zum einbinden von Bildern
+\usepackage{fancyhdr}
+\usepackage{amsmath} %Paket für erweiterte math. Formeln
+\usepackage{booktabs}%Weitere Optionen für Tabellen
+\usepackage{array} 
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage[explicit]{titlesec}
+\usepackage{listings} %für R-Skripte
+\usepackage{color}
+\usepackage{pdfpages} % to include pdfs
+\usepackage{graphicx}
+\usepackage[font=footnotesize]{caption} % define font-size for captions
+\usepackage[font=footnotesize]{subcaption}
+\usepackage{rotating}
+\usepackage{longtable} 
+\usepackage{dcolumn} 
+\usepackage{pictex}
+\usepackage{tikz} 
+ \usetikzlibrary{external}       % function to externalize tics-graphic buildings
+ \tikzset{external/force remake} % overwrites existing externalized pdfs
+ \tikzexternalize[prefix=cache/] % All externalized pdf are saved in folder 'cache'
+ \tikzexternaldisable % Only externalise on-demand
+
+
+\bibliographystyle{IEEEtran}
+
+
+%============================================ Define Settings ========================================================%
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.2,0.7,0.25}
+
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  %frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text 
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; 
+                                   %  also try caption instead of title
+}
+
+\titlespacing{\section}{50pt}{2em}{2em}
+\titlespacing{\subsection}{14pt}{3em}{1.5em}
+\titlespacing{\subsubsection}{12pt}{2em}{1em}
+
+%\setcounter{page}{1} % Setzt Seitenzahl gleich 1
+\setlength{\parindent}{1em} % Einzug bei neuen Absätzen
+
+%============================================ Define personal commands=============================================%
+
+% remind myself of something:
+\newcommand{\note}[1]{\color{red}(#1!)\color{black}}
+\newcommand{\missref}{\note{[REF]}}
+\newcommand{\todo}[1]{\textcolor{blue}{[Todo: #1]}}
+
+% reocurring terms:
+\newcommand{\bwi}{BWI3}
+\newcommand{\adjrsq}{adjusted $R^2$}
+\newcommand{\rmsecv}{RMSE$_{cv}$}
+\newcommand{\mha}{m$^3$/ha}
+
+%============================================ Start Document =======================================================%
+
+\begin{document}
+
+%============================================ SetUp directories ====================================================%
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+%
+%\vspace*{\fill}
+%\begin{tabular}{lll}
+%
+%\small Corresponding author$^\dag$: & \small \underline{andreas.hill@usys.ethz.ch} \\
+%\small Co-authors: & \small \underline{daniel.mandallaz@env.ethz.ch}, \underline{buddenba@uni-trier.de} \\
+%\end{tabular}\\
+%
+%\begin{tabular}{lll}
+%\small Publication date: & \small \today \\
+%\end{tabular}
+%\newpage
+
+% begin roman pagenumbering
+\pagenumbering{Roman}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+\pagestyle{fancy} %Kopfzeile und Fusszeile
+\fancyfoot[C]{\thepage}
+\setlength{\headsep}{15mm}
+
+%============================================ Test temp ===============================================%
+
+%\input{tex/test_temp}\newpage\cleardoublepage
+
+%============================================ Introduction ========================================================%
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%\input{tex/Introduction(2)}\newpage\cleardoublepage
+
+Hier Text
+
+%============================================ Materials and Methods ===============================================%
+
+%\input{tex/Materials_and_Methods}\newpage\cleardoublepage
+
+
+%============================================ Results =============================================================%
+
+%\input{tex/Results}\newpage\cleardoublepage
+
+
+%============================================ Discussion ==========================================================%
+
+%\input{tex/Discussion}\newpage\cleardoublepage
+
+%==================================== Conclusion & Outlook ==========================================================%
+
+%\input{tex/Conclusions}\newpage\cleardoublepage%
+
+%============================================ Appendices ==========================================================%
+
+%\input{tex/Appendices}\newpage\cleardoublepage
+
+
+%============================================ Literature ==========================================================%
+
+%\bibliography{bib/literature}\newpage\cleardoublepage
+    
+
+%==================================================================================================================%
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
