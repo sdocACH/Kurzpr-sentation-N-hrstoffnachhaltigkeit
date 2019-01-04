@@ -1,13 +1,15 @@
-\documentclass[a4paper, 12pt, titlepage]{scrartcl} % tech.report
+\documentclass[a4paper, 11pt, titlepage]{scrartcl} % tech.report
 \usepackage{authblk}
 
-% --- define abstract-section ---- &
+%% --- define abstract-section ---- &
 \newsavebox{\abstractbox}
 \renewenvironment{abstract}
   {\begin{lrbox}{0}\begin{minipage}{\textwidth}
    \begin{center}\normalfont\sectfont\abstractname\end{center}\quotation}
   {\endquotation\end{minipage}\end{lrbox}%
    \global\setbox\abstractbox=\box0 }
+
+\renewcommand{\abstractname}{Hintergrund}
 
 \usepackage{etoolbox}
 \makeatletter
@@ -18,23 +20,33 @@
 \makeatother
 % ----------------------------- &
 
+%% Platz an Seitenr�ndern
+\usepackage{geometry}
+\geometry{
+	top=10mm,
+	bottom=25mm,
+	%height=10mm,
+	left=20mm,
+	right=20mm,
+	,bindingoffset=0mm
+}
+
 %============================================ Define Titlepage =====================================================%
      
 \author[*]{\large Andreas Hill}
 \affil[*]{\normalsize Forstreferendar, Landesforsten Rheinland-Pfalz}     
-\renewcommand\Authands{, } 
+\date{Januar 2019}
+\renewcommand\Authands{, }
  
-% \date{\vspace{-0.3cm} \large \today \vspace{1.1cm}}
-\date{\vspace{-0.8ex}}
-\title{\LARGE Gewährleistung der Nährstoffnachhaltigkeit in den Wäldern von Rheinland-Pfalz - Bewertung des Einsatzes von Debarking Heads \vspace{-1ex}}
+%\date{\vspace{-0.3cm} \large \today \vspace{1.1cm}}
+%\date{\vspace{-0.8ex}}
+\title{\LARGE Gewährleistung der Nährstoffnachhaltigkeit in den Wäldern von Rheinland-Pfalz - Bewertung des Einsatzes von Debarking Heads \vspace{-1.5ex}}
 \subject{\vspace{-1.5cm} Kurzbericht \vspace{0.2cm} \vspace{-0.5cm}}
-
 
 \begin{abstract}
 \noindent \small
-The objective behind this report was to identify an ordinary least square regression model to generate predictions of the standing timber volume associated to a sample location of the Third German Forest Inventory (\textit{BWI3}). The motivation was the consequent integration of the model in model-assisted regression estimators for domain estimations over the entire state- and communal forests of the federal state of Rhineland-Palatinate (Germany). This imposed the restriction on the predictor variables to be available over an area of 6155 km$^2$. Both LiDAR derived height metrics and information from a satellite-based tree species classification map were available and considered as potential predictor variables. In this context, we also introduce a calibration technique to minimize the effect of misclassifications in the tree species predictor variable on the regression model properties. Since the angle count sampling technique applied in the \textit{BWI3} survey leads to ambiguities in the choice of a suitable extraction area (support) for each predictor variable, a model selection procedure was developed to identify the best performing support settings. The mean canopy height and the main tree species of a sample location turned out to be valuable and meaningful predictors. Heterogeneity in the LiDAR data due to time lags and quality variations could considerably be adjusted for by including quality information as a categorical variable in the regression model. The regression model achieved an overall adjusted $R^2$ of 0.49 and a cross validated root mean square error (RMSE$_{cv}$) of 132.12 m$^3$/ha. The model accuracy yet turned out to be particularly higher in regions where the LiDAR acquisition year was identical with the year of the terrestrial inventory ($R^2$ of 0.57).
+Ein nicht unerheblicher Teil des Nährstoffaustrags auf Waldstandorten erfolgt durch die anthropogen-bedingte Entnahme von Holz. Dies birgt gerade auf basenarmen Standorten aus Sanden des Buntsandsteins und Quarziten des Devons, welche den erhöhten Nährstoffentzug auf Dauer nicht kompensieren können, das Risiko des Verlusts des Standortpotentials durch einen dauerhaften Mangel an Calcium (Ca), Magnesium (Mg), Kalium (K), Stickstoff (N) und Phosphor (P). Als Reaktion auf diese Problematik reagierte Landesforsten Rheinland-Pfalz mit dem Erlass der \textit{Richtlinie Nährstoffnachhaltigkeit 2017} (MUEEF 2017). Ziel dieses Konzeptes ist die Gewährleistung der Nährstoffnachhaltigkeit und somit der Sicherung einer standortangepassten Versorgung für alle Waldorte in Rheinland-Pfalz. Dies erfolgt über die Einteilung aller Waldorte in 5 sog. \textit{Vulnerabilitätsstufen}.  Die Klassifikation in eine der 5 Vulnerabilitätsstufen erfolgt durch eine  waldortbezogene Bilanzierung mittels rechnergestütztem Modell (Decision Support System DSS Nährstoffnachhaltigkeit), in welchem die \textit{Nährstoffeinträge} über atmosphärische Stoffdepositionen und Freisetzung aus Mineralverwitterung den \textit{Austrägen} über Nährelementexport via Sickerwasser und Holzernte gegenübergestellt werden. Wichtige Einflussgrößen zu Berechnung der Ein- und Austräge sind dabei Informationen, welche durch die Standortkartierung (Substratreihe und Frischestufe) sowie die Forsteinrichtung (Bestockung, Baumart, Wuchsleistung) erhoben werden. Auf erhöhte Defizite durch zu hohen Nährstoffentzug per Holzernte, welche durch Vergabe hoher Vulnerabilitätsstufen ausgedrückt werden, wird durch \textit{Anpassung der Nutzungsintensität} reagiert. Die Nutzungsintensität regelt hierbei unter Berücksichtigung der Vorgaben von FSC, PEFC und der Energieholzleitlinie RLP, welche Baumkompartimente und Baumdimensionen ungenutzt und damit im Bestand zum Zweck der Nährstoffrückführung verbleiben müssen. So ist beispielsweise bei Stufe 3, 4 und 5 eine Nutzung von Holz unterhalb der Derbholzgrenze - auch im Rahmen des Forstschutzes - untersagt. Des weiteren soll bei Harvestereinsätzen generell eine Konzentration von Reisig, in welchem bis zu 50\% der Nährstoffe eines Baumes gespeichert sind, auf Rückegassen unterbleiben, um einem Nährstoffexport aus den Zwischenfeldern sowie eine Auswaschung aufgrund der Nährstoffakkumulationen zu verhindern. Bei Stufe 4 und 5 gelten zudem angeglichene Mindest- sowie Zopfdurchmesser für Laubholz.
 \end{abstract}
-
 
 %============================================ Load Packages ========================================================%
 \usepackage{hyperref}
@@ -43,7 +55,7 @@ The objective behind this report was to identify an ordinary least square regres
     linkcolor=blue,
     citecolor=blue,
     filecolor=magenta,      
-    urlcolor=blue}
+    urlcolor=black}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[pdftex]{graphicx}%package zum einbinden von Bildern
@@ -61,7 +73,8 @@ The objective behind this report was to identify an ordinary least square regres
 \usepackage[font=footnotesize]{caption} % define font-size for captions
 \usepackage[font=footnotesize]{subcaption}
 \usepackage{rotating}
-\usepackage{longtable} 
+\usepackage{longtable}
+\usepackage{eurosym}
 \usepackage{dcolumn} 
 \usepackage{pictex}
 \usepackage{tikz} 
@@ -69,10 +82,7 @@ The objective behind this report was to identify an ordinary least square regres
  \tikzset{external/force remake} % overwrites existing externalized pdfs
  \tikzexternalize[prefix=cache/] % All externalized pdf are saved in folder 'cache'
  \tikzexternaldisable % Only externalise on-demand
-
-
-\bibliographystyle{IEEEtran}
-
+ 
 
 %============================================ Define Settings ========================================================%
 
@@ -117,29 +127,16 @@ The objective behind this report was to identify an ordinary least square regres
 %\setcounter{page}{1} % Setzt Seitenzahl gleich 1
 \setlength{\parindent}{1em} % Einzug bei neuen Absätzen
 
-%============================================ Define personal commands=============================================%
-
-% remind myself of something:
-\newcommand{\note}[1]{\color{red}(#1!)\color{black}}
-\newcommand{\missref}{\note{[REF]}}
-\newcommand{\todo}[1]{\textcolor{blue}{[Todo: #1]}}
-
-% reocurring terms:
-\newcommand{\bwi}{BWI3}
-\newcommand{\adjrsq}{adjusted $R^2$}
-\newcommand{\rmsecv}{RMSE$_{cv}$}
-\newcommand{\mha}{m$^3$/ha}
-
 %============================================ Start Document =======================================================%
 
 \begin{document}
-
+\sloppy
 %============================================ SetUp directories ====================================================%
 
 \maketitle
-\thispagestyle{empty}
-\newpage
-%
+%\thispagestyle{empty}
+%\newpage
+
 %\vspace*{\fill}
 %\begin{tabular}{lll}
 %
@@ -151,63 +148,175 @@ The objective behind this report was to identify an ordinary least square regres
 %\small Publication date: & \small \today \\
 %\end{tabular}
 %\newpage
+%
+%% begin roman pagenumbering
+%\pagenumbering{Roman}
+%
+%\tableofcontents
+%\newpage
+%
+%\listoffigures
+%\newpage
+%
+%\listoftables
+%\newpage
 
-% begin roman pagenumbering
-\pagenumbering{Roman}
-
-\tableofcontents
-\newpage
-
-\listoffigures
-\newpage
-
-\listoftables
-\newpage
-
-\pagestyle{fancy} %Kopfzeile und Fusszeile
-\fancyfoot[C]{\thepage}
-\setlength{\headsep}{15mm}
-
-%============================================ Test temp ===============================================%
-
-%\input{tex/test_temp}\newpage\cleardoublepage
-
-%============================================ Introduction ========================================================%
+\pagestyle{plain} %Kopfzeile und Fusszeile
+%\fancyfoot[C]{\thepage}
+\setlength{\headsep}{10mm}
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-%\input{tex/Introduction(2)}\newpage\cleardoublepage
+%============================================================================================================%
 
-Hier Text
+% \section{Konzept zur Gewährleistung der Nährstoffnachhaltigkeit in den Wäldern von Rheinland-Pfalz}
 
-%============================================ Materials and Methods ===============================================%
+Neben dem hohen Nährstoffgehalt des Reisigs ist ein nicht unerheblicher Anteil der zum Pfanzenwachstum notwendigen Nährstoffe N, P, Ca, Mg und K in der Rinde von Bäumen gespeichert. Bei der Baumart Fichte sind dies zwischen 14\% und 20\% (Weiß und Göttlein 2012). Eine Trennung der Rinde vom verwerteten Holz und Rückführung der darin gespeicherten Nährstoffe im Waldort stellt somit ein weiteres, bisher unausgeschöpftes Potential im Rahmen der Nährstoffnachhaltigkeit bei der Holzernte dar. Eine Möglichkeit der Umsetzung im Rahmen von Harvestereinsätzen stellt hier die Anwendung sog. \textit{Debarking Heads} (entrindende Harvesterköpfe) dar, welche bisher hauptsächlich in Plantagenwäldern in Südamerika und Afrika eingesetzt werden. Im Rahmen eines Verbundprojektes zur Minimierung des Nährstoffentzugs bei der Holzernte wurde im Auftrag des Bundesministeriums für Ernährung und Landwirtschaft im September 2018 eine Studie über die Anwendbarkeit von Debarking Heads unter europäischen Verhältnissen publiziert (BMELV 2018). Im Folgenden soll auf Basis dieses Berichtes der Einsatz von Debarking Heads in Rheinland-Pfalz im Rahmen des Konzeptes Nährstoffnachhaltigkeit kurz bewertet werden.\\
 
-%\input{tex/Materials_and_Methods}\newpage\cleardoublepage
+\noindent \textit{Technische Umrüstung des Harvesteraggregats}\\
 
+Im Gegensatz zur konventionellen Harvesteraufarbeitung wird durch Debarking Heads die Rinde des Baumes durch dreimaliges Durchziehen des Stammes durch das Harvesteraggregat abgelöst. Dieser Effekt kann bereits durch eine Umrüstung konventioneller Harvesteraggregate unter geringem finanziellen Aufwand erfolgen. Notwendig ist zum einen der Austausch normaler Stachelwalzen durch Entrindungswalzen, welche den Stamm beim Durchziehen in eine Rotation versetzen. Die Entrindungswalzen sind mit Lamellen versehen, welche für ein Einschneiden der oberen Rindenschichten sorgen. Eine Modifizierung der Entastungsmesser, welche die Rinde vom Holz lösen, war nur bei einem der drei in der Studie getesteten Modelle nötig. Aufgrund der erhöhten Belastung durch die Rotation ist jedoch zusätzlich die Installation eines robusteren Messrades nötig. Vorteil der Umrüstung gegenüber der Anschaffung eines eigenen Debarking-Aggregates liegen klar in den deutlich niedrigeren Investitionskosten (ca. \EUR{10.000} laut Studie) seitens der Unternehmer. Zudem kann fließend zwischen der Entrindungs-Aufarbeitung und der konventionellen Aufarbeitung (Stamm wird lediglich einmal durchgezogen) gewechselt werden, ohne das ein zeitaufwendiger Umbau notwendig ist. Dies schlägt sich entsprechend begünstigend in den Kosten pro Maschinenarbeitsstunde nieder. Es ist allerdings wahrscheinlich, dass es durch die Rotation des Stammes zu einem erhöhten Verschleiß des Harvesteraggregats kommt. Erhöhte Ungenauigkeiten des Harvestermaßes konnten hingegen nicht festgestellt werden.\\
 
-%============================================ Results =============================================================%
+\noindent \textit{Erhöhung der Rückführung von Nährstoffen}\\
 
-%\input{tex/Results}\newpage\cleardoublepage
+Zieht man die Aufteilung der Nähstoffgehalte auf die Baumkompartimente der Fichte nach Weiß und Göttlein (2012) heran, so können bei komplettem Ablösen der Rinde mittels Debarking-Verfahren zwischen 14\% und 31\% des in Baumbestand gespeicherten Nährstoffvorrates rückgeführt werden. Allerdings müssen diese Werte hinsichtlich des tatsächlichen Entrindungsprozentes (Richtwert für Sommereinschlag: 87\%) reduziert werden. Mit diesem Wert wurde in der Studie (BMELV 2018) für einen Fichtenbestand mit Umtriebszeit 120 Jahre errechnet, dass über den Einsatz von Debarking Heads die Menge an über die Rinde rückgeführten Nährstoffen im Vergleich zur konventionellen Aufarbeitung um Faktor 8 erhöht werden kann. Damit kann der Anteil des über die Rindenrückführung gedeckten Nährstoffbedarfes von 1\% auf 12\% gesteigert werden. In Verbindung mit dem in der Nährstoffrichtlinie RLP geforderten Verbleibs des Reisigs im Bestand kann der Anteil der im Bestand verbleibenden Nährstoffe von 40\%-50\% auf 60\%-75\% gesteigert werden. Es wäre durch die Anwendung des DSS zu prüfen, ob diese deutliche Erhöhung gerade auf nährstoffarmen Standorten wesentlich zur Nährstoffnachhaltigkeit beitragen kann. Hier ist vor allem zu beachten, dass die Aufarbeitung des Holzes auf Korridore beschränkt ist, in welchen es folglich zu einer lokalen Akkumulation der Rinde und den darin enthaltenden Nährstoffen kommt. Dies birgt, wie in der Nährstoffrichtlinie RLP angesprochen, das Risiko des Exports der Nährstoffe aus den Zwischenfeldern sowie einer Auswaschung der Nährstoffe.\\
 
+\newpage
+\noindent \textit{Auswirkungen auf die Produktivität der Holzernte (ökonomische Bewertung)}\\
 
-%============================================ Discussion ==========================================================%
+Erste Eindrücke zur Auswirkung des Debarking-Verfahrens auf die Produktivität der Holzernte wurden in der besagten Studie (BMELV 2018) im Rahmen einer Durchforstung von 860 Festmeter Kiefern, welche als Industrieholz (Abschnitte von 3 m und 4 m) ausgehalten wurden, gewonnen. Wie zu erwarten kommt es durch das mehrmalige Durchziehen jedes Stammes beim Debarking-Verfahren zu einer um 50\% erhöhten Aufarbeitungszeit. Diese lag in der Pilotstudie bei 2.72 min/fm gegenüber 1.83 min/fm, bzw. bei 12.3 fm/h gegenüber 11.1 fm/h. Dies führte zu einer Erhöhung der Harvester-Erntekosten von \EUR{2}/fm (\EUR{16}/fm). Dieser Kostenmehraufwand pro Festmeter ist allerdings nicht als definitiv anzusehen, da Faktoren wie Investitionskosten und höherer Verschleiß des Aggregates noch nicht präzise beziffert werden können. Es ist zudem noch nicht hinreichend bekannt, ob und in wie weit auch die Kosten für das Rücken des Holzes vom Debarking-Verfahren beeinflusst werden. Allerdings wurde in der Studie erwähnt, dass nach der Entrindung die Stämme im feuchten Zustand aufgrund ihrer Glattheit nur schwer vom Rücker gegriffen werden können, und sich auch die Polterung als schwierig erweist. Besteht die Möglichkeit, mit dem Rücken das Antrocknen der Stämme abzuwarten, sollte sich dies nicht auf die Erntekosten auswirken. Ansonsten ist mit einem zusätzlichen, aktuell nicht abschätzbaren Anstieg der Holzerntekosten zu rechnen.\par
 
-%\input{tex/Discussion}\newpage\cleardoublepage
-
-%==================================== Conclusion & Outlook ==========================================================%
-
-%\input{tex/Conclusions}\newpage\cleardoublepage%
-
-%============================================ Appendices ==========================================================%
-
-%\input{tex/Appendices}\newpage\cleardoublepage
+Ein weiterer potentieller, sich negativ auf den erntekostenfreien Holzerlös auswirkender Faktor sind durch den Debarking Head verursachte Holzschäden, welche das Holz entwerten. Hier stellte sich heraus, dass sich bei Verwendung der Entrindungswalzen das Auftreten von radialen Rissen in den Holzkörper aufgrund der geringeren Kontaktfläche gegenüber konventionellen Vorschubwalzen reduziert. Großflächige Schäden entlang der Stammachse wurden unter Verwendung der Debarking Heads allerdings vermehrt beobachtet. Es wurde jedoch offen gelassen, in wie weit dies von der Einstellung der Entastungsmesser verursacht und beeinflusst werden kann. Da auch keine Angaben zur monetären Entwertung gegeben wurden, sind definitive Auswirkungen auf den erntekostenfreien Holzerlös an diesem Punkt nicht möglich. Es kann aber davon ausgegangen werden, dass für Sortimente wie Schleifholz und Zerspanerholz eine qualitative Entwertung keine Rolle spielt, und sich der monetäre Nachteil auf den durch Holzschäden verursachten Verlust an Biomasse beschränkt. Um Holzschäden beim Ablösen der Rinde zu minimieren sollten Eingriffe im Sommer bzw. in der Vegetationsperiode jenen im Winter vorgezogen werden. Die ist dadurch bedingt, dass im Winter die Trennschicht zwischen Rinde (Phloem) und Holz (Xylem) durch Einstellung des Saftflusses austrocknet und damit das Risiko von Schäden am Holzkörper beim Ablösen der Rinde steigt. Dies spiegelt sich auch an einem deutlich geringeren Entrindungsprozent im Winter ($<$54\%) im Vergleich zum Sommer (74\%-90\%) wieder.\\
 
 
-%============================================ Literature ==========================================================%
+\noindent \textit{Abschließende Bewertung des Einsatzes von Debarking Heads}\\
 
-%\bibliography{bib/literature}\newpage\cleardoublepage
-    
+Eine abschließende Bewertung des Einsatzes von Debarking Heads ist aufgrund des jetzigen Wissensstands nicht möglich. Dem Vorteil einer Erhöhung des Nährstoffanteils im Waldort steht die Frage gegenüber, welcher Teil der Nährstoffe aufgrund der lokalen Akkumulation der Rinde tatsächlich nachhaltig rückgeführt werden kann. Im Vergleich mit alternativen Entrindungsverfahren hat das Debarking Head Verfahren den Vorteil, dass die Entrindung in den Ernteprozess integriert ist und ein zusätzliches Befahren zur Rückführung der Rinde entfällt (Bodenschonung und Emissionsreduktion). Die einfache Umrüstung bestehender Aggregate und ein flexibler Wechsel zur konventionellen Aufarbeitungstechnik reduzieren effizient die zusätzlichen Kosten. Allerdings sind die ökonomischen Auswirkungen noch nicht komplett abzusehen: Hier sind genauere Informationen über die Investitions- und Maschineninstandhaltungskosten, ein vermeintlich erschwertes Rücken des Holzes sowie eine Entwertung des Holzes durch Schäden beim Entrinden und Möglichkeiten zur Minimierung dieser Schäden notwendig. Diese Informationen können im Rahmen von Pilotstudien innerhalb der eigenen Forstverwaltung erhoben werden. Der Einsatz von Debarking Heads sollte jedoch aus Kostengründen auf Standorte, auf welchen längerfristig ein Nährstoffmangel durch Nährstoffentzug droht, beschränkt werden. Die Auswahl entsprechender Waldorte kann dabei durch das bereits bestehende DSS Nährstoffnachhaltigkeit erfolgen. Nach Abklärung der offenen Fragestellungen könnte sich eine Integration von Debarking Head Einsätzen in das Konzept der Nährstoffnachhaltigkeit RLP anbieten.\\
+
+
+\section*{Literatur}
+
+\noindent [1] MUEEF (2017). Gewährleistung der Nährstoffnachhaltigkeit bei der Bewirtschaftung des Staatswaldes des Landes Rheinland-Pfalz. Ministerium für Umwelt, Energie, Ernährung und Forsten, Rheinland-Pfalz.\\
+
+\noindent [2] Weis,  Wendelin;  Göttlein,  Axel  (2012):  Nährstoffnachhaltige  Biomassenutzung.  Bei  der 
+Nutzung von Biomasse ist Vorsicht geboten: Nicht jeder Waldstandort verträgt den erhöhten 
+Nährstoffentzug. In: LWF aktuell (90), S. 44–47\\
+
+\noindent [3] BMELV (2018). Verbundvorhaben: Nährstoffentzug bei der Holzernte minimieren durch die Nutzung von entrindenen Harvesterköpfen 'Debarking Head'. Bundesministerium für Ernährung, Landwirtschaft und Verbraucherschutz. URL: \url{https://www.kwf-online.de/index.php/forschungsprojekte/debarking-heads/584-abschlussbericht-entrindende-harvesterkoepfe}\\
+
+
+
+
+
+% Bewertung 'Debarking Heads'
+%
+% - Auswirkungen auf Produktivität der Holzernte
+%
+% * Leistungszahlen (Auswirkung auf Erntekosten)
+% * Holzschäden und Holzentwertung
+% * Forwarder-Probleme
+% * Entrindungsgrad
+% * Risiko von Bestandesschäden
+%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% ------------------------------------------------------------------------------------- %
+% Einleitung
+
+%Daher ist die Entscheidung, welche Teile der Bäume genutzt werden und damit die
+%Intensität der Nutzung, z.B. eine Beschränkung der Nutzung auf stoich verwertbare höherwertige
+%Sortimente (z. B. Stammholz), die Nutzung des gesamten Derbholzes (mit Rinde) oder die Nutzung
+%der gesamten oberirdischen Biomasse (Vollbaumnutzung), von erheblichem Einuss auf die Höhe
+%der Entzüge an Biomasse und Nährstoen.’
+
+% Der Anteil der Nährstoffe an der Erntemasse steigen dabei mit fortschreitendem Bestandesalter aufgrund des zunehmenden Rinden- und Reisiganteils. So entfallen bei Fichte in der Reife-Phase mehr als 50\% der oberirdischen Nährstoffe auf das Reisig, d.h. Äste u. Zweige > 7cm Durchmesser, sowie Blätter (Quelle: Weiß und Göttlein 2012). Zwischen 14\% und 20\% der Nährstoffe (N, P, Ca, Mg und K) sind in der Rinde gespeichert.
+
+% Essentiell, welche Baumkompartimente im Bestand verbleiben.
+
+% ... somit des Verbleibs von Nährstoffen im Wald
+
+% + Nährstoffentzugs-Problematik durch Holzernte (... nicht unerheblicher Teil des Nährstoffentzuges erfolgt
+%   durch anthropogen-bedingt durch die Holzernte -> ein paar Infos bzw. Werte hier)
+% + Reaktion auf diese Problematik von LForsten RLP: Richtlinie Nährstoffnachhaltigkeit
+% + Inhalt der Richtlinie bzw. Konzeptes:
+%   - Ziel: Gewährleistung der Nährstoffnachhaltigkeit, d.h. konkret: Erhalt des Standortpotentials und damit
+%           Sicherung einer standortangepassten Versorgung
+%   - Methode: * Einteilung aller Waldorte in 5 sog. 'Vulnerabilitätsstufen', welche die Verletzlichkeit des
+%                Ökosystems durch zu hohen Nahrstoffentzug per Holzernte bei Nicht-Einhaltung der Richtlinie
+%                ausdrückt 
+%              * Die Klassifikation eines Waldortes in eine der 5 V.-Stufen erfolgt durch ein rechnergestütztes
+%                Modell (Decision Support System DSS Nährstoffnachhaltigkeit). Kern dieses DSS ist eine
+%				 waldortbezogene Bilanzierung, in welcher die 'Nährstoffeinträge' über atmosphärische
+%                Stoffdepositionen und Freisetzung aus Mineralverwitterung den 'Austrägen' über
+%                Nährelementexport via Sickerwasser und Holzernte gegenübergestellt werden. Wichtige
+%	             Einflussgrößen zu Berechnung der Ein- und Austräge sind Informationen, welche durch die
+%                 Standortkartierung (Substratreihe und Frischestufe) sowie die Forsteinrichtung 
+%                (Bestockung, Baumart, Wuchsleistung) erhoben werden.
+%              * Auf sich ergebende, nicht tolerierbare Defizite bei der Nährstoffversorgung wird durch eine
+%                individuelle Anpassung der Nutzungsintensität per V.-Stufe reagiert. Die Nutzungsintensität
+%                ... durch Definition individueller Zopfdurchmesser
+%
+% ------------------------------------------------------------------------------------- %
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %==================================================================================================================%
 \end{document}
